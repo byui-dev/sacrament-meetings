@@ -1,13 +1,5 @@
 import MeetingCard from "@/components/MeetingCard";
-import type { SacramentMeeting } from "@/lib/types";
-
-async function getMeetings() {
-  const res = await fetch("http://localhost:3000/api/meetings"); 
-  if (!res.ok) {
-    throw new Error("Failed to fetch meetings");    
-  } 
-  return (await res.json()) as SacramentMeeting 
-}
+import { getMeetings } from "@/lib/meetings-db";
 
 export default function MeetingsPage() {
   const meetings = getMeetings();
