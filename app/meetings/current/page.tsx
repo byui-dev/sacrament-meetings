@@ -1,7 +1,24 @@
+import { redirect } from "next/navigation";
+import { getMeetings } from "@/lib/meetings-db";
+
+function formatDateInput(date: Date) {
+  const year = date.getFullYear();
+  const month = String(date.getMonth() + 1).padStart(2, "0");
+  const day = String(date.getDate()).padStart(2, "0");
+  return `${year}-${month}-${day}`;
+}
+
 export default function CurrentMeetingPage() {
-  return (
-    <main className="mx-auto max-w-4xl px-4 py-8">
-      <h1 className="text-2xl font-bold text-slate-900">Current meeting</h1>
-    </main>
-  );
+  const today = new Date();
+  const sunday = new Date(today);
+  sunday.setDate(today.getDate() - today.getDay());
+
+  const sundayDate = formatDateInput(sunday);
+  const meeting = getMeetings(sundayDate)[0];
+
+  if (!meeting) {
+    redirect("/meetings");
+  }
+
+  redirect(`/meetings/${meeting.id}`);
 }

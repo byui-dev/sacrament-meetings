@@ -25,7 +25,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <div className="min-h-screen flex flex-col">
           <Header wardName="Bountiful 8th Ward" />
 
-          {/* Hero using next/image (local asset in public/hero.jpg) */}
+          {/* Hero using next/image (local asset in public/hero.png) */}
           <header className="relative h-48 w-full">
             <Image
               src="/hero.png"
